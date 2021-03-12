@@ -1,10 +1,9 @@
 from secrets import token_hex
 from words import get_entropy_from_words
-from converters import int_to_hex
-# from scratch import generate_menmonic
+from converters import int_to_hex, int_to_binary
 import ecdsa
-# from mnemonic import Mnemonic,
 import mnemonic
+import base58
 
 mnemo = mnemonic.Mnemonic("english")
 
@@ -44,7 +43,17 @@ class Wallet:
     def show_exponent_info(self):
         print(f"hex: {int_to_hex(self.exponent_int)}")
         print(f"int {self.exponent_int}")
-        print(mnemonic.mnemonic.b58encode("asdasdas"))
+       
+        unencoded_string = bytes.fromhex(f"{self.exponent_int:02x}")
+        encoded_string= base58.b58encode(unencoded_string)
+        print(encoded_string)
+
+
+        # base58.b58encode(b'hello world')
+
+    # def privateKeyToWif(self, key_hex):    
+        # return utils.base58CheckEncode(0x80, key_hex.decode('hex'))
+        
 
 
 # Example
