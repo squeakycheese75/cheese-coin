@@ -2,27 +2,22 @@ from mnemonic import Mnemonic
 
 mnemo = Mnemonic("english")
 
-# def generate_words_and_key():
-#     words = mnemo.generate(strength=256)
-#     print(words)
-#     return words
 
-
-# Get key from mneumonic words list 
-def get_entropy_from_words(words: str):
+def get_entropy_from_words(words: str) -> int:
+    """
+    Return entropy from mneumonic words list 
+    """
     entropy = mnemo.to_entropy(words)
-    # print(f"{entropy.hex()} len: {len(entropy.hex())}")
-    # print(int(entropy.hex(), 16))
     return entropy
 
 
-def get_words_from_key(entropy: int) -> str:
-    # words = mnemo.to_mnemonic(entropy)
+def get_menemonic_from_key(entropy: int) -> str:
+    """
+    Return mneumonic from entropy
+    """
     entropy_key_hex = f"{entropy:02x}"
     data = bytes.fromhex(entropy_key_hex)
     return mnemo.to_mnemonic(data)
-    # print(words)
-    # return words
 
 # words = generate_words_and_key()
 # pkey = get_entropy_from_words(words)

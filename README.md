@@ -6,7 +6,7 @@ hands on with the concepts and cryptography involved.
 ## Starting the basic blockhain
 
 ```python
-python3 start.py
+python3 start_blockchain.py
 ```
 
 ## Starting the wallet creation/restoration
@@ -14,6 +14,9 @@ python3 start.py
 ```python
 python3 create_wallet.py
 ```
+
+# Getting started
+Some useful resources I discovered during the process. 
 
 ## Reading material
 
@@ -24,3 +27,8 @@ python3 create_wallet.py
 
 ## Resources
 * [Mnemonic Code Converter](https://iancoleman.io/bip39/)
+
+## Youtube
+
+* [Base58 encoding](https://www.youtube.com/watch?v=QusgmV8YX6s&list=PLxo73YXD-KCj2XAAKtsM_Y2A37ivUDToF&index=22)
+* [BIP-39 - Generating mnemonics and seeds](https://www.youtube.com/watch?v=q_GgEHedfuI&list=PLxo73YXD-KCj2XAAKtsM_Y2A37ivUDToF&index=20)

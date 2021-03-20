@@ -18,23 +18,31 @@ NETWORK_BYTE = b'00'
 class Wallet:
     def __init__(self, 
                 # network: Network = Network.TESTNET,
-                mnemonic_words: str = None, 
-                seed: str = ""):
+                mnemonic_words: str = None):
         if mnemonic_words:
             self._load_from_mnemonic(mnemonic_words)
         else:
             self._create_new()
         self.compressed_public_key = self.get_compressed_public_key()
-        # if network == Network.TESTNET:
-        #     self.prefix = b'6f'
+        # if network == Network.MAINNET:
+        #     self.NETWORK_BYTE = b'00'
         # else:
-        #     self.prefix = b'00'
+        #     self.NETWORK_BYTE = b'6f'
+
+    def load_from_entropy(self, entropy: hex):
+        # random_hex = '60cf347dbc59d31c1358c8e5cf5e45b822ab85b79cb32a9f3d98184779a9efc2'
+        secret_exponent = int(entropy, 16)
+
+        self.secret_exponent = secret_exponent
+        self.sk = ecdsa.keys.SigningKey.from_secret_exponent(
+            secret_exponent, ecdsa.curves.SECP256k1, hashlib.sha256
+        )
 
     def _load_from_mnemonic(self, words):
-        # entropy = get_entropy_from_words(words)
-        # secret_exponent = int(entropy.hex(), 16)
-        random_hex = '60cf347dbc59d31c1358c8e5cf5e45b822ab85b79cb32a9f3d98184779a9efc2'
-        secret_exponent = int(random_hex, 16)
+        entropy = get_entropy_from_words(words)
+        secret_exponent = int(entropy.hex(), 16)
+        # random_hex = '60cf347dbc59d31c1358c8e5cf5e45b822ab85b79cb32a9f3d98184779a9efc2'
+        # secret_exponent = int(random_hex, 16)
 
         self.secret_exponent = secret_exponent
         self.sk = ecdsa.keys.SigningKey.from_secret_exponent(
